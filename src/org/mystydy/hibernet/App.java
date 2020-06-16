@@ -19,7 +19,8 @@ public class App {
 	try {
 		//addRecordsToDB(factory,session);
 //		retrieveRecordsFromDB(factory,session);
-		updateRecordsFromDB(factory,session);
+//		updateRecordsFromDB(factory,session);
+		deleteRecordsFromDB(factory,session);
 	} catch (Exception e) {
 		// TODO: handle exception
 	}
@@ -83,6 +84,32 @@ public class App {
 			//perform operation
 			user = session.get(Users.class,2);
 			user.setFirstName("Yogesh");
+			
+			//commit the transaction
+			
+			session.getTransaction().commit();
+
+			System.out.println(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+
+		}
+  }
+  
+  public static void deleteRecordsFromDB( SessionFactory factory,Session session) {
+	  System.out.println("retrieving records fron database");
+	  try {
+			//create object of entity class type
+			Users user = new Users();
+			
+			//Start transaction
+			session.beginTransaction();
+		
+			//perform operation
+			user = session.get(Users.class,2);
+			//deleting records from userid 2
+			session.delete(user);
 			
 			//commit the transaction
 			
