@@ -131,7 +131,8 @@ public class App {
 	  try {
 			//Start transaction
 			session.beginTransaction();
-			List<Users> users = session.createQuery(" from users").getResultList();
+			List<Users> users = session.createQuery(" from users where first_name='yogesh'"
+					+ " or lastName='varal'").getResultList();
 			for (Users user : users) {
 				System.out.println(user);
 			}
