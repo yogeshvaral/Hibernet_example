@@ -23,7 +23,9 @@ public class App {
 //		retrieveRecordsFromDB(factory,session);
 //		updateRecordsFromDB(factory,session);
 //		deleteRecordsFromDB(factory,session);
-		listRecordsFromDB(factory,session);
+//		listRecordsFromDB(factory,session);
+//		updateRecordsFromDBHQL(factory,session);
+		deleteRecordsFromDBHQL(factory,session);
 	} catch (Exception e) {
 		// TODO: handle exception
 	}
@@ -136,6 +138,35 @@ public class App {
 			for (Users user : users) {
 				System.out.println(user);
 			}
+	  
+	  } catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+
+		}
+  }
+  public static void updateRecordsFromDBHQL( SessionFactory factory,Session session) {
+	  
+	  try {
+			//Start transaction
+			session.beginTransaction();
+			session.createQuery(" update users set password='yogeshPassword' where first_name='yogesh'"
+					+ " or lastName='varal'").executeUpdate();
+			session.getTransaction().commit();
+	  
+	  } catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+
+		}
+  }
+  public static void deleteRecordsFromDBHQL( SessionFactory factory,Session session) {
+	  
+	  try {
+			//Start transaction
+			session.beginTransaction();
+			session.createQuery("delete from users where user_id=9").executeUpdate();
+			session.getTransaction().commit();
 	  
 	  } catch (Exception e) {
 			e.printStackTrace();
