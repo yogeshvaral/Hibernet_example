@@ -1,5 +1,7 @@
 package org.mystydy.hibernet;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -20,7 +22,8 @@ public class App {
 		//addRecordsToDB(factory,session);
 //		retrieveRecordsFromDB(factory,session);
 //		updateRecordsFromDB(factory,session);
-		deleteRecordsFromDB(factory,session);
+//		deleteRecordsFromDB(factory,session);
+		listRecordsFromDB(factory,session);
 	} catch (Exception e) {
 		// TODO: handle exception
 	}
@@ -117,6 +120,23 @@ public class App {
 
 			System.out.println(user);
 		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+
+		}
+  }
+  
+  public static void listRecordsFromDB( SessionFactory factory,Session session) {
+	  
+	  try {
+			//Start transaction
+			session.beginTransaction();
+			List<Users> users = session.createQuery(" from users").getResultList();
+			for (Users user : users) {
+				System.out.println(user);
+			}
+	  
+	  } catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 
